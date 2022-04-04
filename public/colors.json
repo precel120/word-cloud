@@ -1,0 +1,18 @@
+{
+  "question": "select colors",
+  "all_words": [
+    "jeans",
+    "existence",
+    "ink",
+    "red",
+    "blue",
+    "yellow",
+    "laugh",
+    "behavior",
+    "expansion",
+    "white",
+    "black",
+    "cakes"
+  ],
+  "good_words": ["red", "blue", "yellow", "white", "black"]
+}

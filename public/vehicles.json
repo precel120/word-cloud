@@ -1,0 +1,15 @@
+{
+  "question": "select vehicles",
+  "all_words": [
+    "belief",
+    "wire",
+    "car",
+    "bus",
+    "star",
+    "river",
+    "hat",
+    "skirt",
+    "train"
+  ],
+  "good_words": ["car", "bus", "train"]
+}
