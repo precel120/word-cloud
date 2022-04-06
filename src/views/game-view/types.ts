@@ -16,3 +16,9 @@ export interface Position {
   left: PositionProps["left"];
   top: PositionProps["top"];
 }
+
+export interface SummaryScore {
+  right: number;
+  missed: number;
+  wrong: number;
+}
