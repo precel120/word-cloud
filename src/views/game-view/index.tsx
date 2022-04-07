@@ -1,16 +1,16 @@
 import * as React from "react";
 import { Heading, Center, Stack, Box, Button, Text } from "@chakra-ui/react";
 import { Navigate } from "react-router-dom";
-import { GameData, Word, Position } from "./types";
+import { GameData, Word } from "./types";
 import { useDispatch } from "react-redux";
 import { setScore } from "../../redux/slice";
+import "./index.css";
 
 const GameView = () => {
   const [question, setQuestion] = React.useState<string>();
   const [goodWords, setGoodWords] = React.useState<string[]>([]);
   const [allWords, setAllWords] = React.useState<Word[]>([]);
   const [selectedWords, setSelectedWords] = React.useState<string[]>([]);
-  const [positions, setPositions] = React.useState<Position[]>([]);
   const [isSubmitted, setIsSubmitted] = React.useState(false);
   const [isFinished, setIsFinished] = React.useState(false);
 
@@ -38,21 +38,14 @@ const GameView = () => {
       setGoodWords(good_words);
 
       let temp: Word[] = [];
-      let tempPositions: Position[] = [];
 
       all_words.forEach((word, index) => {
         temp.push({
           word,
           color: "black",
-          position: { left: Math.random() * 200, top: Math.random() * 200 },
-        });
-        tempPositions.push({
-          left: temp[index].position.left,
-          top: temp[index].position.top,
         });
       });
       setAllWords(temp);
-      setPositions(tempPositions);
     })();
   }, []);
 
@@ -95,6 +88,7 @@ const GameView = () => {
     });
     setIsSubmitted(true);
   };
+
   const handleFinishGame = () => {
     const correctAnswers = goodWords.filter((word) =>
       selectedWords.includes(word)
@@ -116,25 +110,15 @@ const GameView = () => {
   };
 
   return (
-    <Center>
+    <Center marginTop="10vh">
       <Stack>
-        <Heading>{question}</Heading>
-        <Box
-          borderWidth="2px"
-          borderRadius="lg"
-          color="black"
-          position="relative"
-          height="20vh"
-          width="40vw"
-        >
-          {allWords.map(({ word, color, position }) => (
+        <Heading textAlign="center">{question}</Heading>
+        <Box className="wrapper">
+          {allWords.map(({ word, color }) => (
             <Text
-              position="absolute"
-              left={position.left}
-              top={position.top}
-              key={word}
-              cursor="pointer"
               color={color}
+              cursor="pointer"
+              key={word}
               onClick={handleWordClick}
             >
               {word}

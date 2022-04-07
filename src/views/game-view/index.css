@@ -1,0 +1,12 @@
+.wrapper {
+    display: grid;
+    border: black solid 2px;
+    border-radius: 5px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+}
+
+.wrapper > p {
+    margin: 5px;
+}

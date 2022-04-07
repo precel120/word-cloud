@@ -1,5 +1,3 @@
-import { PositionProps } from "@chakra-ui/react";
-
 export interface GameData {
   question: string
   all_words: string[];
@@ -9,12 +7,6 @@ export interface GameData {
 export interface Word {
   word: string;
   color: string;
-  position: Position
-}
-
-export interface Position {
-  left: PositionProps["left"];
-  top: PositionProps["top"];
 }
 
 export interface SummaryScore {
