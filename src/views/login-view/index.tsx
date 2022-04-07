@@ -3,6 +3,7 @@ import { Center, Stack, Button, Input, Heading } from "@chakra-ui/react";
 import { Navigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUserName } from "../../redux/slice";
+import "../game-view/game.scss"
 
 const LoginView = () => {
   const [loginCredentials, setLoginCredentials] = React.useState<string>("");
@@ -21,7 +22,7 @@ const LoginView = () => {
   };
 
   return (
-    <Center>
+    <Center className="center">
       <Stack>
         <Heading>Wordcloud game</Heading>
         <Input

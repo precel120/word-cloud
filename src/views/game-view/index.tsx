@@ -1,10 +1,10 @@
 import * as React from "react";
 import { Heading, Center, Stack, Box, Button, Text } from "@chakra-ui/react";
 import { Navigate } from "react-router-dom";
-import { GameData, Word } from "./types";
 import { useDispatch } from "react-redux";
+import { GameData, Word, Selection } from "./types";
 import { setScore } from "../../redux/slice";
-import "./index.css";
+import "./game.scss";
 
 const GameView = () => {
   const [question, setQuestion] = React.useState<string>();
@@ -43,6 +43,7 @@ const GameView = () => {
         temp.push({
           word,
           color: "black",
+          selection: Selection.Neutral,
         });
       });
       setAllWords(temp);
@@ -80,10 +81,19 @@ const GameView = () => {
       if (!foundWord) {
         return;
       }
+      const index = allWords.indexOf(foundWord);
       if (goodWords.find((good) => good === selected)) {
-        allWords[allWords.indexOf(foundWord)].color = "green";
+        allWords[index] = {
+          ...allWords[index],
+          color: "rgb(0, 230, 0)",
+          selection: Selection.Correct,
+        };
       } else {
-        allWords[allWords.indexOf(foundWord)].color = "red";
+        allWords[index] = {
+          ...allWords[index],
+          color: "red",
+          selection: Selection.Wrong,
+        };
       }
     });
     setIsSubmitted(true);
@@ -110,19 +120,25 @@ const GameView = () => {
   };
 
   return (
-    <Center marginTop="10vh">
+    <Center className="center">
       <Stack>
         <Heading textAlign="center">{question}</Heading>
         <Box className="wrapper">
-          {allWords.map(({ word, color }) => (
-            <Text
-              color={color}
-              cursor="pointer"
-              key={word}
-              onClick={handleWordClick}
-            >
-              {word}
-            </Text>
+          {allWords.map(({ word, color, selection }) => (
+            <Box key={word}>
+              {(() => {
+                if (selection === Selection.Correct) {
+                  return <Text color={color}>Good</Text>;
+                } else if (selection === Selection.Wrong) {
+                  return <Text color={color}>Bad</Text>;
+                } else {
+                  return null;
+                }
+              })()}
+              <Text color={color} cursor="pointer" onClick={handleWordClick}>
+                {word}
+              </Text>
+            </Box>
           ))}
         </Box>
         {!isSubmitted ? (
