@@ -125,7 +125,12 @@ const GameView = () => {
         <Heading textAlign="center">{question}</Heading>
         <Box className="wrapper">
           {allWords.map(({ word, color, selection }) => (
-            <Box key={word}>
+            <Box
+              key={word}
+              className="overlay"
+              color={color}
+              onClick={handleWordClick}
+            >
               {(() => {
                 if (selection === Selection.Correct) {
                   return <Text color={color}>Good</Text>;
@@ -135,9 +140,7 @@ const GameView = () => {
                   return null;
                 }
               })()}
-              <Text color={color} cursor="pointer" onClick={handleWordClick}>
-                {word}
-              </Text>
+              {word}
             </Box>
           ))}
         </Box>
