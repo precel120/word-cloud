@@ -37,16 +37,16 @@ const GameView = () => {
       setQuestion(question);
       setGoodWords(good_words);
 
-      let temp: Word[] = [];
+      let tempWords: Word[] = [];
 
-      all_words.forEach((word, index) => {
-        temp.push({
+      all_words.forEach((word) => {
+        tempWords.push({
           word,
           color: "black",
           selection: Selection.Neutral,
         });
       });
-      setAllWords(temp);
+      setAllWords(tempWords);
     })();
   }, []);
 
@@ -56,8 +56,8 @@ const GameView = () => {
     if (isSubmitted) {
       return;
     }
-    //@ts-ignore
-    const selectedValue = e.target.innerText;
+    const input = e.target as HTMLElement;
+    const selectedValue = input.innerText;
     const wasInSelectedWords: boolean = !!selectedWords.find(
       (word) => word === selectedValue
     );

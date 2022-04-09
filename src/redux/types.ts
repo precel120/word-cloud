@@ -1,4 +1,4 @@
-import { SummaryScore } from "../views/game-view/types";
+import { SummaryScore } from "../routes/game-view/types";
 
 export interface InitialStateType {
 	userName: string,
